@@ -1,5 +1,5 @@
 
-# AV Schematic Builder — Starter v5
+# avflow
 
 React + TypeScript + @xyflow/react with:
 - Custom equipment node (resizable, inputs left, outputs right).
@@ -25,4 +25,3 @@ pnpm dev
 
 ## Page Frame controls
 Use the Toolbar → Page Frame → Settings to set paper size, orientation, margins, and DPI. PNG export crops to the inner frame at chosen DPI.
-# avflow
