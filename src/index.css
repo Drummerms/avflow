@@ -1,0 +1,18 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --card: #0f172a;
+  --card-foreground: #e2e8f0;
+  --muted: #0b1224;
+  --muted-foreground: #94a3b8;
+}
+
+html, body, #root { height: 100%; }
+
+.neon-node { border-color: theme('colors.neon.500'); box-shadow: theme('boxShadow.neon'); }
+.bg-card { background-color: var(--card); }
+.text-card-foreground { color: var(--card-foreground); }
+.bg-muted\/70 { background-color: rgba(11,18,36,0.7); }
