@@ -16,10 +16,10 @@ export interface Connector {
 
 export interface AppliedTemplateRef { id: UUID; version?: number }
 
-export interface EquipmentNodeData {
+export interface EquipmentNodeData extends Record<string, unknown> {
   label: string
   description?: string
-  meta: Record<string, string | number | boolean | null>
+  meta: Record<string, string | number | boolean | null | undefined>
   inputs: Connector[]
   outputs: Connector[]
   template?: AppliedTemplateRef
@@ -33,7 +33,7 @@ export interface CableMeta {
   tags?: string[]
 }
 
-export interface CableEdgeData {
+export interface CableEdgeData extends Record<string, unknown> {
   cableType: string
   meta: CableMeta
   routing?: 'bezier' | 'step' | 'straight'
@@ -53,3 +53,6 @@ export interface Diagram {
 
 export interface NodeTemplate { id: UUID; name: string; data: EquipmentNodeData; tags?: string[]; version?: number; updatedAt?: number }
 export interface CableTemplate { id: UUID; name: string; data: CableEdgeData; tags?: string[]; version?: number; updatedAt?: number }
+
+export type EquipmentNode = Node<EquipmentNodeData, 'equipment'>
+export type CableEdge = Edge<CableEdgeData, 'cable'>

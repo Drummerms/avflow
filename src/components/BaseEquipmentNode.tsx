@@ -1,9 +1,9 @@
 
-import type { NodeProps } from '@xyflow/react'
 import { Handle, Position, NodeResizer } from '@xyflow/react'
-import type { EquipmentNodeData } from '@types'
+import type { NodeProps } from '@xyflow/react'
+import type { EquipmentNode } from '@types'
 
-export default function BaseEquipmentNode({ data, selected }: NodeProps<EquipmentNodeData>) {
+export default function BaseEquipmentNode({ data, selected }: NodeProps<EquipmentNode>) {
   return (
     <div className="relative rounded-2xl shadow-lg border neon-node bg-card text-card-foreground min-w-[160px] min-h-[100px]">
       <NodeResizer minWidth={160} minHeight={100} isVisible={selected} />

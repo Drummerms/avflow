@@ -1,29 +1,28 @@
 
-import { useMemo, useState } from 'react'
-import type { Edge, Node } from '@xyflow/react'
-import type { EquipmentNodeData, Connector } from '@types'
+import { useMemo, useState, type Dispatch, type SetStateAction } from 'react'
+import type { EquipmentNode, CableEdge, Connector } from '@types'
 
 type Props = {
-  nodes: Node<EquipmentNodeData>[]
-  edges: Edge[]
-  setNodes: any
-  setEdges: any
+  nodes: EquipmentNode[]
+  setNodes: Dispatch<SetStateAction<EquipmentNode[]>>
+  setEdges: Dispatch<SetStateAction<CableEdge[]>>
 }
 
-export default function ConnectorsPanel({ nodes, edges, setNodes, setEdges }: Props){
+export default function ConnectorsPanel({ nodes, setNodes, setEdges }: Props){
   const selected = useMemo(() => nodes.find(n => n.selected), [nodes])
   const [side, setSide] = useState<'inputs'|'outputs'>('inputs')
   if (!selected) return null
+  const activeNode = selected
 
-  const list = (selected.data as any)[side] as Connector[]
+  const list = activeNode.data[side] as Connector[]
   function updateList(newList: Connector[]){
-    setNodes((nds: Node<EquipmentNodeData>[]) => nds.map(n => n.id === selected.id ? ({ ...n, data: { ...n.data, [side]: newList } }) : n))
+    setNodes(nds => nds.map(n => n.id === activeNode.id ? ({ ...n, data: { ...n.data, [side]: newList } }) : n))
   }
 
   function addPort(){
     const count = list.length + 1
     const std = 'CUSTOM'
-    const id = `${selected.id}.${side==='inputs'?'in':'out'}.${std}.${count}`
+    const id = `${activeNode.id}.${side==='inputs'?'in':'out'}.${std}.${count}`
     const c: Connector = { id, label: (side==='inputs'?'IN ':'OUT ') + count, standard: std, direction: side==='inputs'?'in':'out', group: side==='inputs'?'input':'output' }
     updateList([...list, c])
   }
@@ -31,7 +30,7 @@ export default function ConnectorsPanel({ nodes, edges, setNodes, setEdges }: Pr
   function removePort(idx: number){
     const port = list[idx]
     // detach edges connected to this port
-    setEdges((eds: Edge[]) => eds.filter(e => e.sourceHandle !== port.id && e.targetHandle !== port.id))
+    setEdges(eds => eds.filter(e => e.sourceHandle !== port.id && e.targetHandle !== port.id))
     const next = list.slice(0, idx).concat(list.slice(idx+1))
     updateList(next)
   }

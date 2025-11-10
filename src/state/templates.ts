@@ -1,8 +1,7 @@
 
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
-import type { Node } from '@xyflow/react'
-import type { EquipmentNodeData } from '@types'
+import type { EquipmentNode, EquipmentNodeData } from '@types'
 
 export type NodeTemplate = {
   id: string
@@ -15,7 +14,7 @@ export type NodeTemplate = {
 
 type TemplateStore = {
   templates: NodeTemplate[]
-  addFromNode: (node: Node<EquipmentNodeData>, name?: string) => void
+  addFromNode: (node: EquipmentNode, name?: string) => void
   remove: (id: string) => void
   getById: (id: string) => NodeTemplate | undefined
 }

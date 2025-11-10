@@ -5,7 +5,7 @@ export function nextSeriesLabel(prefix: string, existing: string[]): string {
     .filter(s => re.test(s))
     .map(s => parseInt(s.split('-').pop() || '0', 10))
   const next = (nums.length ? Math.max(...nums) + 1 : 1)
-  const width = Math.max(2, (nums.length ? String(Math.max(...nums))).length)
+  const width = Math.max(2, (nums.length ? String(Math.max(...nums)) : '0').length)
   return `${prefix}-${String(next).padStart(width, '0')}`
 }
 

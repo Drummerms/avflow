@@ -1,17 +1,18 @@
 
 import { create } from 'zustand'
-import type { Node, Edge, OnConnect } from '@xyflow/react'
-import type { EquipmentNodeData, CableEdgeData, Unit } from '@types'
+import type { OnConnect } from '@xyflow/react'
+import { MarkerType } from '@xyflow/react'
+import type { EquipmentNode, CableEdge, Unit } from '@types'
 import { incrementId } from '@utils/incrementId'
 
 type Store = {
-  nodes: Node<EquipmentNodeData>[]
-  edges: Edge<CableEdgeData>[]
+  nodes: EquipmentNode[]
+  edges: CableEdge[]
   grid: { snap: boolean; spacing: [number, number]; unit: Unit }
   theme: 'light' | 'dark'
   dirty: boolean
-  setNodes: (nodes: Node<EquipmentNodeData>[] | ((ns: Node<EquipmentNodeData>[]) => Node<EquipmentNodeData>[])) => void
-  setEdges: (edges: Edge<CableEdgeData>[] | ((es: Edge<CableEdgeData>[]) => Edge<CableEdgeData>[])) => void
+  setNodes: (nodes: EquipmentNode[] | ((ns: EquipmentNode[]) => EquipmentNode[])) => void
+  setEdges: (edges: CableEdge[] | ((es: CableEdge[]) => CableEdge[])) => void
   onConnect: OnConnect
   setGrid: (g: Partial<Store['grid']>) => void
   setTheme: (t: Store['theme']) => void
@@ -34,7 +35,7 @@ export const useDiagramStore = create<Store>((set, get) => ({
     sourceHandle: params.sourceHandle,
     targetHandle: params.targetHandle,
     type: 'cable',
-    markerEnd: { type: 'arrowclosed' },
+    markerEnd: { type: MarkerType.ArrowClosed },
     data: { cableType: '', meta: {}, routing: 'bezier' }
   }] }),
   setGrid: (g) => set({ grid: { ...get().grid, ...g }, dirty: true }),

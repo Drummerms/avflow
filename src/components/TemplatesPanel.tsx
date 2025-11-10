@@ -1,10 +1,9 @@
 
 import { useMemo } from 'react'
-import type { Node } from '@xyflow/react'
-import type { EquipmentNodeData } from '@types'
+import type { EquipmentNode } from '@types'
 import { useTemplateStore } from '@state/templates'
 
-type Props = { nodes: Node<EquipmentNodeData>[] }
+type Props = { nodes: EquipmentNode[] }
 
 export default function TemplatesPanel({ nodes }: Props){
   const { templates, addFromNode, remove } = useTemplateStore()
