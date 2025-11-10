@@ -4,6 +4,7 @@ node_modules/
 # Build artifacts
 dist/
 build/
+tsconfig.tsbuildinfo
 
 # Vite cache
 .vite/
@@ -20,4 +21,3 @@ pnpm-debug.log*
 # Editor / OS files
 .DS_Store
 Thumbs.db
-
